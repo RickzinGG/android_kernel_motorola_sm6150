@@ -47,7 +47,6 @@ jobs:
 
       - name: Clonar AnyKernel3
         run: |
-          # Removido o "-b hanoip" para puxar a branch padrão (master/main) do seu AnyKernel3
           git clone --depth=1 https://github.com/RickzinGG/AnyKernel3 "${{ github.workspace }}/AnyKernel3"
 
       - name: Compilar kernel
@@ -69,7 +68,9 @@ jobs:
           export PATH="/usr/lib/ccache:$PATH"
 
           make O=out ARCH=arm64 clean mrproper
-          make O=out ARCH=arm64 vendor/hanoip_defconfig
+          
+          # CORREÇÃO: Alterado de vendor/hanoip_defconfig para hanoip_defconfig
+          make O=out ARCH=arm64 hanoip_defconfig
 
           make -j$(nproc --all) O=out ARCH=arm64 \
             CC=clang LD=ld.lld AR=llvm-ar NM=llvm-nm \
