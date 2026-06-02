@@ -47,7 +47,8 @@ jobs:
 
       - name: Clonar AnyKernel3
         run: |
-          git clone --depth=1 -b hanoip https://github.com/RickzinGG/AnyKernel3 "${{ github.workspace }}/AnyKernel3"
+          # Removido o "-b hanoip" para puxar a branch padrão (master/main) do seu AnyKernel3
+          git clone --depth=1 https://github.com/RickzinGG/AnyKernel3 "${{ github.workspace }}/AnyKernel3"
 
       - name: Compilar kernel
         run: |
