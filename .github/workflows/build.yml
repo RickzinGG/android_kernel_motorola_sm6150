@@ -6,7 +6,7 @@ on:
       KERNEL_BRANCH:
         description: 'Branch do kernel (veja a branch padrão do repo)'
         required: true
-        default: 'main'
+        default: 'android-13.0'
 
 jobs:
   build:
@@ -41,17 +41,11 @@ jobs:
 
       - name: Clonar kernel
         run: |
-          git clone --depth=1 \
-            -b ${{ github.event.inputs.KERNEL_BRANCH }} \
-            https://github.com/RickzinGG/android_kernel_motorola_sm6150 \  # ← troque SEU_USUARIO
-            ${{ github.workspace }}/kernel
+          git clone --depth=1 -b "${{ github.event.inputs.KERNEL_BRANCH }}" https://github.com/RickzinGG/android_kernel_motorola_sm6150 "${{ github.workspace }}/kernel"
 
       - name: Clonar AnyKernel3
         run: |
-          git clone --depth=1 \
-            -b hanoip \
-            https://github.com/RickzinGG/AnyKernel3 \  # ← troque SEU_USUARIO
-            ${{ github.workspace }}/AnyKernel3
+          git clone --depth=1 -b hanoip https://github.com/RickzinGG/AnyKernel3 "${{ github.workspace }}/AnyKernel3"
 
       - name: Compilar kernel
         run: |
@@ -133,5 +127,6 @@ jobs:
             Kernel: 4.14 CAF
             ROM: PixelExperience Plus Android 13
             Toolchain: Clang 14 + LLD
-          files: ${{ github.workspace }}/${{ env.ZIP_NAME }}  # ← troque SEU_USUARIO
+          files: ${{ github.workspace }}/${{ env.ZIP_NAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          
